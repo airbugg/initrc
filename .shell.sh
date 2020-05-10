@@ -10,11 +10,9 @@ sudo -i
 # .macos
 #
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    git clone []
+    curl -LO https://raw.githubusercontent.com/airbugg/initrc/master/.macos
     mv .macos ~/.macos
     sh ~/.macos
-
-
 
 # install fish
 #
@@ -25,7 +23,7 @@ elif which apt > /dev/null; then
     sudo apt-get update
     sudo apt-get install fish
 else
-    echo "Couldn\'t install fish, mate."
+    echo "Could not install fish, mate."
 fi
 
 touch ~/.config/fish/config.fish
@@ -78,5 +76,5 @@ elif which apt > /dev/null; then
     # sudo apt-get update
     # sudo apt-get install fish
 else
-    echo "Couldn\'t install hugo, mate."
+    echo "Could not install hugo, mate."
 fi
