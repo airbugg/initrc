@@ -71,10 +71,6 @@ if which hugo > /dev/null; then
     return
 if which brew > /dev/null; then
     brew install hugo
-elif which apt > /dev/null; then
-    # sudo apt-add-repository ppa:fish-shell/release-3
-    # sudo apt-get update
-    # sudo apt-get install fish
 else
     echo "Could not install hugo, mate."
 fi
