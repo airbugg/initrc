@@ -2,18 +2,19 @@
 
 # install brew
 #
-if which brew > /dev/null; then
-    return
-else
+if ! which brew > /dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
 # .macos
 #
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    curl -LO https://raw.githubusercontent.com/airbugg/initrc/master/.macos
-    mv .macos ~/.macos
-    sh ~/.macos
+    if ! [[ -f ~/.macos ]]; then
+        curl -LO https://raw.githubusercontent.com/airbugg/initrc/master/.macos
+        mv .macos ~/.macos
+        sh ~/.macos
+    fi
+fi
 
 # install fish
 #
@@ -27,6 +28,13 @@ else
     echo "Could not install fish, mate."
 fi
 
+# install fisher
+# 
+if ! which fisher > /dev/null; then
+    curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+    fisher add jethrokuan/fzf
+fi
+
 touch ~/.config/fish/config.fish
 
 # install fzf
@@ -37,9 +45,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 # install exa
 #
-if which exa > /dev/null; then
-    return
-else
+if ! which exa > /dev/null; then
     if which brew > /dev/null; then
         brew install exa
     else
@@ -55,9 +61,7 @@ fi
 
 # install bat
 #
-if which bat > /dev/null; then
-    return
-else
+if ! which bat > /dev/null; then
     if which brew > /dev/null; then
         brew install bat
     elif which apt > /dev/null; then
@@ -66,12 +70,11 @@ else
     echo abbr -a cat bat | tee -a ~/.config/fish/config.fish
 fi
 
+
 # install hugo
 #
 if which hugo > /dev/null; then
-    return
-if which brew > /dev/null; then
-    brew install hugo
-else
-    echo "Could not install hugo, mate."
+    if which brew > /dev/null; then
+        brew install hugo
+    fi
 fi
