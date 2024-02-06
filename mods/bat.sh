@@ -15,7 +15,7 @@ install_ubuntu() {
 
     # bat -> batcat symlink
     # https://github.com/sharkdp/bat#on-ubuntu-using-apt
-    ln -s /usr/bin/batcat /usr/bin/bat
+    sudo ln -s /usr/bin/batcat /usr/bin/bat
 }
 
 uninstall_ubuntu() {
